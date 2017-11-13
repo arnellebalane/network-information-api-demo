@@ -41,5 +41,15 @@ function displayNetworkInformation(data) {
     });
 }
 
-displayNetworkInformation(navigator.connection);
-navigator.connection.onchange = (e) => displayNetworkInformation(navigator.connection);
+if (navigator.connection) {
+    displayNetworkInformation(navigator.connection);
+    navigator.connection.onchange = (e) => displayNetworkInformation(navigator.connection);
+} else {
+    type.remove();
+    ul.remove();
+
+    document.body.classList.add('not-supported');
+    h1.classList.add('not-supported');
+    h1.textContent = 'Network Information API is not supported.';
+}
+
